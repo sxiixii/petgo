@@ -12,15 +12,15 @@ type MyResponse struct {
 	Age  int    `json:"age"`
 }
 
-func NewMyResponse() MyResponse {
+func NewMyResponse(name string, age int) MyResponse {
 	return MyResponse{
-		Name: "Alex",
-		Age:  25,
+		Name: name,
+		Age:  age,
 	}
 }
 
 func ArticlesCategoryHandler(w http.ResponseWriter, r *http.Request) {
-	myResponse := NewMyResponse()
+	myResponse := NewMyResponse("Alex", 33)
 	myResponseToByte, err := json.Marshal(&myResponse)
 	if err != nil {
 		fmt.Printf("Ошибка сериализации данных %v", err)
