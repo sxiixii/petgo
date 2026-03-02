@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/joho/godotenv"
+	"github.com/sxiixii/petgo/config"
 )
 
 type MyResponse struct {
@@ -31,7 +34,16 @@ func ArticlesCategoryHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func init() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
 func main() {
+	conf := config.New()
+	fmt.Printf("config is %v", conf)
+
 	fmt.Println("Hello world!")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", ArticlesCategoryHandler)
